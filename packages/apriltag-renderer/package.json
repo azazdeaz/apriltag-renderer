@@ -24,9 +24,17 @@
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "tsc:watch": "tsc -w"
   },
   "bugs": {
     "url": "https://github.com/azazdeaz/apriltag-renderer/issues"
+  },
+  "dependencies": {
+    "get-pixels": "^3.3.2",
+    "ndarray": "^1.0.18"
+  },
+  "devDependencies": {
+    "@types/ndarray": "^1.0.6"
   }
 }
