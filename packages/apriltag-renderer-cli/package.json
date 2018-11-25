@@ -1,0 +1,36 @@
+{
+  "name": "apriltag-renderer-cli",
+  "version": "0.0.0",
+  "description": "AprilTag renderer CLI",
+  "keywords": [
+    "apriltag",
+    "cli"
+  ],
+  "author": "Polgár András <azazdeaz@gmail.com>",
+  "homepage": "https://github.com/azazdeaz/apriltag-renderer#readme",
+  "license": "ISC",
+  "main": "lib/apriltag-renderer-cli.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/azazdeaz/apriltag-renderer.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "tsc": "tsc",
+    "tsc:watch": "tsc -w"
+  },
+  "bugs": {
+    "url": "https://github.com/azazdeaz/apriltag-renderer/issues"
+  },
+  "dependencies": {
+    "apriltag-renderer": "^0.0.0",
+    "commander": "^2.19.0"
+  }
+}

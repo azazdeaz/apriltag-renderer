@@ -1,5 +1,6 @@
 import * as ndarray from 'ndarray'
-import * as Jimp from 'jimp'
+// import * as Jimp from 'jimp'
+const Jimp = require('jimp')
 
 type Options = {
   map: ndarray

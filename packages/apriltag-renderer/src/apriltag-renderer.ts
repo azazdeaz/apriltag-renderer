@@ -7,14 +7,18 @@ type Options = {
   size?: number
   file?: string
   format?: string
+  black?: string
+  white?: string
 }
 
-async function render({
+export async function render({
   family = 'tag36h11',
   value = 0,
   size = 256,
   file,
   format = 'png',
+  black = '#000000',
+  white = '#FFFFFF',
 }: Options = {}) {
   if (!file) {
     file = `${family}_${value}.${format}`
@@ -23,8 +27,7 @@ async function render({
     map: await getTagData({ family, value }),
     size,
     file: 'new_name.png',
-    black: '#FF5555',
+    black,
+    white,
   })
 }
-
-render({ value: 2319, family: 'tag36h10' })
