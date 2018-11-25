@@ -7,9 +7,9 @@
     "noLib": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es6",
+    "target": "ES2016",
     "sourceMap": true,
-    "lib": ["es6"]
+    "lib": ["es2016"]
   },
   "exclude": ["node_modules", "**/*.spec.ts"]
 }

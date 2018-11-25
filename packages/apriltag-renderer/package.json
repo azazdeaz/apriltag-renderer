@@ -32,6 +32,8 @@
   },
   "dependencies": {
     "get-pixels": "^3.3.2",
+    "jimp": "^0.5.6",
+    "lodash": "^4.17.11",
     "ndarray": "^1.0.18"
   },
   "devDependencies": {
