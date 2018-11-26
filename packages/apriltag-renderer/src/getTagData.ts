@@ -20,8 +20,6 @@ export async function getTagData({
   if (index < 0) {
     throw new Error(`Can't find the given value "${value}". Accepted values are "${info.values}"`)
   }
-  console.log(info, family)
-  console.log(`value index`, index)
   const row = Math.floor(index / info.cols)
   const col = Math.floor(index % info.cols)
   const x = col * (info.size + info.margin * 2) + info.margin

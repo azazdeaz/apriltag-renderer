@@ -4,18 +4,18 @@ const Jimp = require('jimp')
 
 type Options = {
   map: ndarray
-  size?: number
-  file?: string
+  size: number
+  file: string
   black?: string
   white?: string
 }
 
 export async function renderBitmap({
   map,
-  size = 200,
+  size,
+  file,
   black = '#000000',
   white = '#FFFFFF',
-  file,
 }: Options) {
   const resolution = map.shape[0]
   size -= size % resolution

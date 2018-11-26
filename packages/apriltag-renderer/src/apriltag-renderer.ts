@@ -26,7 +26,7 @@ export async function render({
   await renderBitmap({
     map: await getTagData({ family, value }),
     size,
-    file: 'new_name.png',
+    file,
     black,
     white,
   })
