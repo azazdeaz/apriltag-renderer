@@ -24,9 +24,9 @@ export async function getTagData({
 }: Options) {
   const info = getSourceInfo(family)
   const pixels = await getPixelsPromised(info.base64Mosaic)
-  const index = info.values.indexOf(value)
-  if (index < 0) {
-    throw new Error(`Can't find the given value "${value}". Accepted values are "${info.values}"`)
+  const index = Math.floor(value)
+  if (value < 0 || value > info.values-1) {
+    throw new Error(`The given value is "${value}" is out of the range "0-${info.values}"`)
   }
   const row = Math.floor(index / info.cols)
   const col = Math.floor(index % info.cols)

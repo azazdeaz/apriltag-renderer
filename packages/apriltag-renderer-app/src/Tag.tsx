@@ -1,9 +1,12 @@
-import { render } from 'apriltag-renderer'
 import * as React from 'react'
 
-export class Tag extends React.Component {
+interface IProps {
+  base64: string | null
+}
+
+export class Tag extends React.Component<IProps> {
   private canvasRef: React.RefObject<HTMLCanvasElement>
-  constructor(props) {
+  constructor(props: IProps) {
     super(props)
     this.canvasRef = React.createRef()
   }
@@ -18,7 +21,7 @@ export class Tag extends React.Component {
   }
   private async draw() {
     const canvas = this.canvasRef.current
-    if (canvas === null) {
+    if (canvas === null || !this.props.base64) {
       return
     }
     const ctx = canvas.getContext('2d')
@@ -31,7 +34,6 @@ export class Tag extends React.Component {
       canvas.height = img.height
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
     }
-    const image = await render()
-    img.src = await image.base64()
+    img.src = this.props.base64
   }
 }

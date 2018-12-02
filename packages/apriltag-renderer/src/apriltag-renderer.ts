@@ -1,6 +1,8 @@
 import { getTagData } from './getTagData'
 import { renderBitmap } from './renderBitmap'
 
+export { families } from './families'
+
 type Options = {
   family?: string
   value?: number
