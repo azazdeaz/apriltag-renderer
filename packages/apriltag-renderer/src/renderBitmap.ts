@@ -1,11 +1,10 @@
 import * as ndarray from 'ndarray'
 // import * as Jimp from 'jimp'
-const Jimp = require('jimp')
+import * as Jimp from 'jimp'
 
 type Options = {
   map: ndarray
   size: number
-  file: string
   black?: string
   white?: string
 }
@@ -13,7 +12,6 @@ type Options = {
 export async function renderBitmap({
   map,
   size,
-  file,
   black = '#000000',
   white = '#FFFFFF',
 }: Options) {
@@ -31,5 +29,13 @@ export async function renderBitmap({
     }
   }
 
-  image.write(file)
+  return {
+    write: write(image),
+    base64: base64(image),
+  }
 }
+
+const write = (image: Jimp) => async (file: string) => {
+  await image.writeAsync(file)
+}
+const base64 = (image: Jimp) => () => image.getBase64Async(Jimp.MIME_PNG)
