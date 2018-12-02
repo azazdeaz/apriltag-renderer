@@ -1,8 +1,18 @@
 import * as getPixels from 'get-pixels'
 import * as ndarray from 'ndarray'
-import { join } from 'path'
-import { promisify } from 'util'
 import { getSourceInfo } from './families'
+
+function getPixelsPromised(base64: string): Promise<ndarray> {
+  return new Promise((resolve, reject) => {
+    getPixels(base64, (err: Error, pixels: ndarray) => {
+      if (err) {
+        reject(err)
+        return
+      }
+      resolve(pixels)
+    })
+  })
+}
 
 type Options = {
   family: string
@@ -11,11 +21,9 @@ type Options = {
 export async function getTagData({
   family,
   value
-}) {
+}: Options) {
   const info = getSourceInfo(family)
-  const pixels: ndarray = await promisify(getPixels)(
-    join(__dirname, '../mosaics', info.mosaicFile)
-  )
+  const pixels = await getPixelsPromised(info.base64Mosaic)
   const index = info.values.indexOf(value)
   if (index < 0) {
     throw new Error(`Can't find the given value "${value}". Accepted values are "${info.values}"`)
