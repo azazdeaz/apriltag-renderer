@@ -1,39 +1,56 @@
+import { render } from 'apriltag-renderer'
 import * as React from 'react'
+import './App.css'
 
 interface IProps {
+  family: string
+  value: number
+  size: number
+  black: string
+  white: string
+}
+
+interface IState {
   base64: string | null
 }
 
-export class Tag extends React.Component<IProps> {
-  private canvasRef: React.RefObject<HTMLCanvasElement>
-  constructor(props: IProps) {
+export class Tag extends React.Component<IProps, IState> {
+  private pRendering: Promise<void> | null = null
+  private rerenderRequested: boolean = false
+
+  constructor(props) {
     super(props)
-    this.canvasRef = React.createRef()
-  }
-  public render() {
-    return <canvas ref={this.canvasRef} />
+    this.state = {
+      base64: null,
+    }
   }
   public componentDidMount() {
-    this.draw()
+    this.updateTag(this.props)
   }
-  public componentDidUpdate() {
-    this.draw()
+  public componentWillReceiveProps(nextProps) {
+    this.updateTag(nextProps)
   }
-  private async draw() {
-    const canvas = this.canvasRef.current
-    if (canvas === null || !this.props.base64) {
-      return
+  public render() {
+    const { base64 } = this.state
+    const { size } = this.props
+    return base64 ? (
+      <img src={base64} style={{ width: size, height: size }} />
+    ) : null
+  }
+  private updateTag = (props: IProps) => {
+    // make sure that only one render is running at once
+    //  (there should be some better utility for this)
+    if (this.pRendering) {
+      this.rerenderRequested = true
+      return this.pRendering
     }
-    const ctx = canvas.getContext('2d')
-    const img = new Image()
-    img.onload = () => {
-      if (!ctx) {
-        return
+    return (async () => {
+      const image = await render(props)
+      this.setState({ base64: await image.base64() })
+      if (this.rerenderRequested) {
+        this.rerenderRequested = false
+        this.updateTag(this.props)
       }
-      canvas.width = img.width
-      canvas.height = img.height
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
-    }
-    img.src = this.props.base64
+    })()
   }
 }

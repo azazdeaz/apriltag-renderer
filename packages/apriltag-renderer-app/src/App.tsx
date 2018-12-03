@@ -1,6 +1,5 @@
-import { families, render } from 'apriltag-renderer'
+import { families } from 'apriltag-renderer'
 import { GUI, Number, Select, Text } from 'dis-gui'
-import { debounce } from 'lodash'
 import * as React from 'react'
 import './App.css'
 import { GithubRibbon } from './GithubRibbon'
@@ -9,7 +8,6 @@ import { Tag } from './Tag'
 const familyNames = families.map(family => family.name)
 
 interface IState {
-  base64: string | null
   family: string
   value: number
   size: number
@@ -18,15 +16,9 @@ interface IState {
 }
 
 class App extends React.Component<{}, IState> {
-  private updateTag = debounce(async () => {
-    const image = await render(this.state)
-    this.setState({ base64: await image.base64() })
-  }, 0)
-
   constructor(props) {
     super(props)
     this.state = {
-      base64: null,
       black: '#000000',
       family: 'tag36h11',
       size: 300,
@@ -34,11 +26,8 @@ class App extends React.Component<{}, IState> {
       white: '#FFFFFF',
     }
   }
-  public componentDidMount() {
-    this.updateTag()
-  }
   public render() {
-    const { black, family, size, value, white, base64 } = this.state
+    const { black, family, size, value, white } = this.state
     return (
       <div className="App">
         <GithubRibbon />
@@ -74,7 +63,7 @@ class App extends React.Component<{}, IState> {
         <pre className="App-intro">
           {`--family ${family} --value ${value} --size ${size} --black "${black}" --white "${white}"`}
         </pre>
-        <Tag base64={base64} />
+        <Tag {...this.state} />
       </div>
     )
   }
@@ -84,12 +73,16 @@ class App extends React.Component<{}, IState> {
     return info ? info.values - 1 : 0
   }
   private updateOptions = (options: Partial<IState>) => {
-    const newState = { ...options } as IState
-    const maxValue = this.getMaxValue(newState.family)
-    newState.value = Math.max(0, Math.min(newState.value, maxValue))
-    
-    this.setState(newState)
-    this.updateTag()
+    if ('family' in options) {
+      // make sure that the value is in the boundaries of the new family
+      const maxValue = this.getMaxValue(options.family)
+      options.value = Math.max(
+        0,
+        Math.min(options.value || this.state.value, maxValue)
+      )
+    }
+
+    this.setState(options as IState)
   }
   private setFamily = (family: string) => this.updateOptions({ family })
   private setValue = (value: number) => this.updateOptions({ value })
