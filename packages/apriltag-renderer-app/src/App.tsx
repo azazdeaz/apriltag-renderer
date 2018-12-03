@@ -15,6 +15,20 @@ interface IState {
   white: string
 }
 
+const guiStyle = {
+  backgroundColor: '#171219',
+  highlight: '#FFB20E',
+  label: {
+    fontColor: '#FFB20E',
+    fontWeight: 'normal',
+  },
+  lowlight: '#636564',
+  lowlighterr: '#FBB',
+  paddingX: 3,
+  paddingY: 3,
+  separator: '1px solid #171219',
+}
+
 class App extends React.Component<{}, IState> {
   constructor(props) {
     super(props)
@@ -31,7 +45,7 @@ class App extends React.Component<{}, IState> {
     return (
       <div className="App">
         <GithubRibbon />
-        <GUI>
+        <GUI style={guiStyle}>
           <Select
             label="Family"
             value={family}
