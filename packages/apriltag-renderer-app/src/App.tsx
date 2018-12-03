@@ -6,8 +6,6 @@ import './App.css'
 import { GithubRibbon } from './GithubRibbon'
 import { Tag } from './Tag'
 
-// import logo from './logo.svg'
-
 const familyNames = families.map(family => family.name)
 
 interface IState {
@@ -86,7 +84,7 @@ class App extends React.Component<{}, IState> {
     return info ? info.values - 1 : 0
   }
   private updateOptions = (options: Partial<IState>) => {
-    const newState = { ...this.state, ...options }
+    const newState = { ...options } as IState
     const maxValue = this.getMaxValue(newState.family)
     newState.value = Math.max(0, Math.min(newState.value, maxValue))
     
