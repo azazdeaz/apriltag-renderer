@@ -1,7 +1,6 @@
 {
   "name": "root",
   "private": true,
-  "homepage": "http://azazdeaz.github.io/apriltag-renderer",
   "devDependencies": {
     "@types/lodash": "^4.14.118",
     "@types/node": "^10.12.10",
