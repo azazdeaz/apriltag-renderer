@@ -1,6 +1,6 @@
 {
   "name": "apriltag-renderer",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Renders AprilTags",
   "keywords": [
     "apriltag",

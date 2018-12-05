@@ -1,10 +1,10 @@
 {
   "name": "apriltag-renderer-app",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "private": true,
   "homepage": "http://azazdeaz.github.io/apriltag-renderer",
   "dependencies": {
-    "apriltag-renderer": "^0.0.0",
+    "apriltag-renderer": "^0.0.1",
     "dis-gui": "^2.1.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",

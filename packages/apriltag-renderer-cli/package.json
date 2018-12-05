@@ -1,6 +1,6 @@
 {
   "name": "apriltag-renderer-cli",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "AprilTag renderer CLI",
   "keywords": [
     "apriltag",
@@ -30,7 +30,7 @@
     "url": "https://github.com/azazdeaz/apriltag-renderer/issues"
   },
   "dependencies": {
-    "apriltag-renderer": "^0.0.0",
+    "apriltag-renderer": "^0.0.1",
     "commander": "^2.19.0"
   }
 }
