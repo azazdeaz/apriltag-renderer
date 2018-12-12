@@ -1,9 +1,10 @@
 import { families } from 'apriltag-renderer'
-import { GUI, Number, Select, Text } from 'dis-gui'
+import { Button, GUI, Number, Select, Text } from 'dis-gui'
 import * as React from 'react'
 import './App.css'
 import { GithubRibbon } from './GithubRibbon'
 import { Tag } from './Tag'
+import FileSaver from 'file-saver'
 
 const familyNames = families.map(family => family.name)
 
@@ -70,6 +71,7 @@ class App extends React.Component<{}, IState> {
           />
           <Text label="Black" value={black} onChange={this.setBlack} />
           <Text label="White" value={white} onChange={this.setWhite} />
+          <Button label="Download" onClick={this.downloadImage} />
         </GUI>
         <header className="App-header">
           <h1 className="App-title">AprilTag Renderer</h1>
@@ -103,6 +105,12 @@ class App extends React.Component<{}, IState> {
   private setSize = (size: number) => this.updateOptions({ size })
   private setBlack = (black: string) => this.updateOptions({ black })
   private setWhite = (white: string) => this.updateOptions({ white })
+  private downloadImage = async () => {
+    const { base64 } = this.state
+    const res = await fetch(url)
+    const blob = res.blob()
+    FileSaver.saveAs(blob, "hello world.txt")
+  }
 }
 
 export default App

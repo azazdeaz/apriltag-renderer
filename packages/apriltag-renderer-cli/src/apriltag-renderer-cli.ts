@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import * as program from 'commander'
 import { render, semmi } from 'apriltag-renderer'
 import { omitBy, isUndefined } from 'lodash'
@@ -36,7 +38,6 @@ const options = omitBy(
 if (!options.path) {
   options.path = `${options.family}_${options.value}.png`
 }
-const x = semmi('as')
 
 
 async function run() {

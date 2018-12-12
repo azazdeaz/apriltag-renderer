@@ -3,3 +3,11 @@ lerna-debug.log
 npm-debug.log
 packages/*/lib
 .idea
+.vscode
+
+# snapcraft
+parts
+prime
+snap
+stage
+*.snap
