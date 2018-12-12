@@ -5,14 +5,16 @@
   "devDependencies": {
     "@types/lodash": "^4.14.118",
     "@types/node": "^10.12.10",
+    "lerna": "^3.6.0",
     "prettier": "^1.15.2",
     "typescript": "^3.2.1"
   },
   "bin": {
-    "apriltag-renderer": "./bin/hello.js"
+    "apriltag-renderer": "./packages/apriltag-renderer-cli/lib/apriltag-renderer-cli.js"
   },
   "scripts": {
     "tsc": "lerna run tsc",
-    "tsc:watch": "lerna run tsc:watch --stream --no-sort"
+    "tsc:watch": "lerna run tsc:watch --stream --no-sort",
+    "postinstall": "lerna bootstrap && npm run tsc"
   }
 }
